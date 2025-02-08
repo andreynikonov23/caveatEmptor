@@ -1,0 +1,18 @@
+<persistence
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+        version="1.0" xmlns:xsi="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="test">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>org.company.model.Image</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/caveat_emptor"/>
+        <property name="javax.persistence.jdbc.user" value="root"/>
+        <property name="javax.persistence.jdbc.password" value="1234"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.use_sql_comments">true</property>
+    </properties>
+    </persistence-unit>
+</persistence>
