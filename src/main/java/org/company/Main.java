@@ -1,21 +1,22 @@
 package org.company;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 import org.company.model.Image;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("caveatemptor");
         EntityManager entityManager = emf.createEntityManager();
 
         try {
             entityManager.getTransaction().begin();
-            Query jpqlQuery = entityManager.createQuery("SELECT img from Image img");
+            Query jpqlQuery = entityManager.createQuery("SELECT imges from org.company.model.Image imges");
             List<Image> resultList = jpqlQuery.getResultList();
 
             for (Image img : resultList) {
