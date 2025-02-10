@@ -2,6 +2,8 @@ package org.company.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "images")
@@ -14,7 +16,7 @@ public class Image {
 
     public Image(){}
 
-    public Image(long id, String title, String filename) {
+    public Image(String title, String filename) {
         this.id = id;
         this.title = title;
         this.filename = filename;

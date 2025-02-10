@@ -22,6 +22,8 @@ public class Main {
             for (Image img : resultList) {
                 System.out.println(img.getId() + "--" + img.getFilename());
             }
+            Image newImage = new Image("test", "C://test");
+            entityManager.persist(newImage);
 
             entityManager.getTransaction().commit();
         } catch (Exception e) {
