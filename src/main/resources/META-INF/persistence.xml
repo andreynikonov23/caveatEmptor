@@ -6,6 +6,11 @@
     <persistence-unit name="caveatemptor">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>org.company.model.Image</class>
+        <class>org.company.model.User</class>
+        <class>org.company.model.Item</class>
+        <class>org.company.model.BillingDetails</class>
+        <class>org.company.model.CreditCard</class>
+        <class>org.company.model.BankAccount</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

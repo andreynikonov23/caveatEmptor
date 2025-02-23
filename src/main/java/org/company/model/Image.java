@@ -2,6 +2,7 @@ package org.company.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -10,14 +11,16 @@ import org.hibernate.annotations.Parameter;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private long id;
+    @Column (nullable = false)
     private String title;
+    @NotNull
     private String filename;
 
     public Image(){}
 
     public Image(String title, String filename) {
-        this.id = id;
         this.title = title;
         this.filename = filename;
     }
