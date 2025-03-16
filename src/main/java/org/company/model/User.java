@@ -13,7 +13,8 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "shipping_address_id")
     private Address address;
 
 
@@ -60,6 +61,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("[id:%d, %s, %s, %s, %s, %s]", id, username, firstname, lastname, address);
+        return String.format("[id:%d, %s, %s, %s, %s]", id, username, firstname, lastname, address);
     }
 }

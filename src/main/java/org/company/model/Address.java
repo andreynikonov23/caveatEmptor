@@ -8,15 +8,9 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "addresses")
 public class Address {
     @Id
-    @GeneratedValue(generator = "addressKeyGenerator")
-    @GenericGenerator(
-            name = "addressKeyGenerator",
-            strategy = "foreign",
-            parameters = @Parameter(name = "property", value = "user")
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne (mappedBy = "address", cascade = CascadeType.PERSIST)
     private User user;
     private String street;
     @Embedded
