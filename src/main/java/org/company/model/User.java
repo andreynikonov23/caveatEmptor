@@ -13,24 +13,17 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
-    @Embedded
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Address address;
-    @AttributeOverrides({
-            @AttributeOverride(name = "street", column = @Column(name = "billing_street")),
-            @AttributeOverride(name = "city.zipcode", column = @Column(name = "billing_zipcode")),
-            @AttributeOverride(name = "city.name", column = @Column(name = "billing_city"))
-    })
-    private Address billingAddress;
 
 
     public User(){}
 
-    public User(String username, String firstname, String lastname, Address address, Address billingAddress) {
+    public User(String username, String firstname, String lastname, Address address) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
-        this.billingAddress = billingAddress;
     }
 
     public String getUsername() {
@@ -65,16 +58,8 @@ public class User {
         this.address = address;
     }
 
-    public Address getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
-    }
-
     @Override
     public String toString() {
-        return String.format("[id:%d, %s, %s, %s, %s, %s]", id, username, firstname, lastname, address, billingAddress);
+        return String.format("[id:%d, %s, %s, %s, %s, %s]", id, username, firstname, lastname, address);
     }
 }

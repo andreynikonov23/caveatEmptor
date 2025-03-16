@@ -1,10 +1,23 @@
 package org.company.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
-@Embeddable
+@Entity
+@Table(name = "addresses")
 public class Address {
+    @Id
+    @GeneratedValue(generator = "addressKeyGenerator")
+    @GenericGenerator(
+            name = "addressKeyGenerator",
+            strategy = "foreign",
+            parameters = @Parameter(name = "property", value = "user")
+    )
+    protected long id;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private User user;
     private String street;
     @Embedded
     @AttributeOverrides({

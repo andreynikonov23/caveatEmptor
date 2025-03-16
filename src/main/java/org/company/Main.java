@@ -16,11 +16,11 @@ public class Main {
 
         try {
             entityManager.getTransaction().begin();
-            Query jpqlQuery = entityManager.createQuery("SELECT item FROM Item item");
-            List<Item> resultList = jpqlQuery.getResultList();
+            Query jpqlQuery = entityManager.createQuery("SELECT ad FROM Address ad");
+            List<Address> resultList = jpqlQuery.getResultList();
 
-            for (Item item : resultList) {
-                System.out.println(item);
+            for (Address address : resultList) {
+                System.out.println(address);
             }
 
         } catch (Exception e) {
