@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import org.company.converters.MonetaryAmountConverter;
 
 import java.time.LocalTime;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table (name = "items")
@@ -21,8 +21,9 @@ public class Item {
     @NotNull
     @Column(name = "auction_end")
     private Date auctionEnd;
-    @Transient
-    private Image image;
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    private Set<Bid> bids = new HashSet<>();
     @Transient
     private User seller;
     @Column(name = "buy_now_price")
@@ -31,13 +32,14 @@ public class Item {
 
     public Item(){}
 
-    public Item(String name, double initialPrice, Date auctionEnd, Image image, User seller, MonetaryAmount buyNowPrice) {
+    public Item(String name, double initialPrice, Date auctionEnd, User seller, MonetaryAmount buyNowPrice, Set<Bid> bids) {
         this.name = name;
         this.initialPrice = initialPrice;
         this.auctionEnd = auctionEnd;
-        this.image = image;
+
         this.seller = seller;
         this.buyNowPrice = buyNowPrice;
+        this.bids = bids;
     }
 
     public String getName() {
@@ -64,13 +66,13 @@ public class Item {
         this.auctionEnd = auctionEnd;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
+//    public Set<Image> getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(Set<Image> images) {
+//        this.images = images;
+//    }
 
     public User getSeller() {
         return seller;
@@ -90,6 +92,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("[id: %d, %s, %s]", id, name, buyNowPrice);
+        return String.format("[id: %d, %s, %s, %s]", id, name, buyNowPrice, bids);
     }
 }

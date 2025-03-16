@@ -11,6 +11,7 @@
         <class>org.company.model.BillingDetails</class>
         <class>org.company.model.CreditCard</class>
         <class>org.company.model.BankAccount</class>
+        <class>org.company.model.Bid</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

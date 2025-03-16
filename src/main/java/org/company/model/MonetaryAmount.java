@@ -6,9 +6,9 @@ import java.util.Currency;
 
 public class MonetaryAmount implements Serializable {
     private final BigDecimal value;
-    private final Currency currency;
+    private final String currency;
 
-    public MonetaryAmount(BigDecimal value, Currency currency) {
+    public MonetaryAmount(BigDecimal value, String currency) {
         this.value = value;
         this.currency = currency;
     }
@@ -16,7 +16,7 @@ public class MonetaryAmount implements Serializable {
     public BigDecimal getValue() {
         return value;
     }
-    public Currency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
@@ -46,6 +46,6 @@ public class MonetaryAmount implements Serializable {
 
     public static MonetaryAmount fromString(String sqlValue) {
         String[] split = sqlValue.split(" ");
-        return new MonetaryAmount(new BigDecimal(split[0]), Currency.getInstance(split[1]));
+        return new MonetaryAmount(new BigDecimal(split[0]), split[1]);
     }
 }

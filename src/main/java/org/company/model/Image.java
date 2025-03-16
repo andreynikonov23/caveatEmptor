@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Parent;
 
-@Entity
+@Embeddable
 @Table(name = "images")
 public class Image {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
