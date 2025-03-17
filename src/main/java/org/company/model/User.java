@@ -3,6 +3,9 @@ package org.company.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table (name = "users")
 public class User {
@@ -13,6 +16,8 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
+    @OneToMany(mappedBy = "buyer")
+    private Set<Item> boughtItems = new HashSet<>();
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shipping_address_id")
     private Address address;
@@ -61,6 +66,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("[id:%d, %s, %s, %s, %s]", id, username, firstname, lastname, address);
+        return String.format("[id:%d, %s, %s, %s, %s, %s]", id, username, firstname, lastname, address, boughtItems);
     }
 }

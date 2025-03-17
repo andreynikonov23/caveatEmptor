@@ -74,6 +74,6 @@ public class Bid {
 
     @Override
     public String toString() {
-        return String.format("Bid{%d, %s}", id, createOn);
+        return String.format("Bid{%d, %s, %f}", id, createOn, amount);
     }
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.company.converters.MonetaryAmountConverter;
 
-import java.time.LocalTime;
 import java.util.*;
 
 @Entity
@@ -23,10 +22,18 @@ public class Item {
     private Date auctionEnd;
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
-    private Set<Bid> bids = new HashSet<>();
+    private Collection<Bid> bids = new ArrayList<>();
 
     @OneToOne(mappedBy = "item", fetch = FetchType.LAZY)
     private Shipment shipment;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "item_buyer",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(nullable = false)
+    )
+    private User buyer;
     @Transient
     private User seller;
     @Column(name = "buy_now_price")
@@ -35,7 +42,7 @@ public class Item {
 
     public Item(){}
 
-    public Item(String name, double initialPrice, Date auctionEnd, User seller, MonetaryAmount buyNowPrice, Set<Bid> bids, Shipment shipment) {
+    public Item(String name, double initialPrice, Date auctionEnd, User seller, MonetaryAmount buyNowPrice, Set<Bid> bids, Shipment shipment, User buyer) {
         this.name = name;
         this.initialPrice = initialPrice;
         this.auctionEnd = auctionEnd;
@@ -43,6 +50,7 @@ public class Item {
         this.seller = seller;
         this.buyNowPrice = buyNowPrice;
         this.bids = bids;
+        this.buyer = buyer;
     }
 
     public String getName() {

@@ -16,11 +16,11 @@ public class Main {
 
         try {
             entityManager.getTransaction().begin();
-            Query jpqlQuery = entityManager.createQuery("SELECT item FROM Item item");
-            List<Item> resultList = jpqlQuery.getResultList();
+            Query jpqlQuery = entityManager.createQuery("SELECT user FROM User user");
+            List<User> resultList = jpqlQuery.getResultList();
 
-            for (Item item : resultList) {
-                System.out.println(item);
+            for (User user : resultList) {
+                System.out.println(user);
             }
 
         } catch (Exception e) {
