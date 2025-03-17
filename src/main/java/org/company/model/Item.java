@@ -24,6 +24,9 @@ public class Item {
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private Set<Bid> bids = new HashSet<>();
+
+    @OneToOne(mappedBy = "item", fetch = FetchType.LAZY)
+    private Shipment shipment;
     @Transient
     private User seller;
     @Column(name = "buy_now_price")
@@ -32,7 +35,7 @@ public class Item {
 
     public Item(){}
 
-    public Item(String name, double initialPrice, Date auctionEnd, User seller, MonetaryAmount buyNowPrice, Set<Bid> bids) {
+    public Item(String name, double initialPrice, Date auctionEnd, User seller, MonetaryAmount buyNowPrice, Set<Bid> bids, Shipment shipment) {
         this.name = name;
         this.initialPrice = initialPrice;
         this.auctionEnd = auctionEnd;
@@ -92,6 +95,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("[id: %d, %s, %s, %s]", id, name, buyNowPrice, bids);
+        return String.format("[id: %d, %s, %s, %s. %s]", id, name, buyNowPrice, bids, shipment);
     }
 }
